@@ -44,6 +44,11 @@
 
         function inputValidator() {
             this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // If empty or negative, reset to 0
+            if (this.value === '' || parseInt(this.value) < 0) {
+                this.value = 0;
+            }
         }
 
 
