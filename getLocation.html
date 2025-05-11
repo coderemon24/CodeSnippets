@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Current Location</title>
+</head>
+<body>
+    <h1>Get Current Location</h1>
+    <button id="getLocation">Get Location</button>
+    <p id="currLocation"></p>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js"></script>
+    <script>
+        const getLocation = document.getElementById('getLocation');
+        const currLocation = document.getElementById('currLocation');
+        
+        function currentLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }else{
+                currLocation.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        
+        function showPosition(position){
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            
+            axios
+            .get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+            .then(response => {
+                const address = response.data.display_name;
+                currLocation.innerHTML = address;
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+        
+        getLocation.addEventListener('click', currentLocation);
+        
+    </script>
+</body>
+</html>
