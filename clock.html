@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Clock</title>
+</head>
+<body>
+    <h1 id="clock"></h1>
+    
+    <script>
+        function getTime(){
+            const date = new Date().toLocaleTimeString();
+            /*
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+                const seconds = date.getSeconds();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                const h = hours % 12 || 12;
+                const m = minutes < 10 ? '0' + minutes : minutes;
+                const s = seconds < 10 ? '0' + seconds : seconds;
+                const time = `${h}:${m}:${s} ${ampm}`;
+                document.getElementById('clock').innerHTML = time;
+            */
+            document.getElementById('clock').innerHTML = date;
+        }
+        
+        setInterval(getTime, 1000);
+    </script>
+</body>
+</html>
