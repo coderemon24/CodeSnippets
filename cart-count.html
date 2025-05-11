@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Count</title>
+    <link rel="stylesheet" href="./css/cart-counter.css">
+</head>
+
+<body>
+    <section id="counter-section">
+        <div class="container">
+            <div class="cart-counter">
+                <div class="counter-wrapper">
+                    <button id="decrement">-</button>
+                    <input type="text" value="0" min="0" id="counter-input">
+                    <!-- <span id="counter-display">0</span> -->
+                    <button id="increment">+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const decrement = document.getElementById('decrement');
+        const counterDisplay = document.getElementById('counter-input');
+        const increment = document.getElementById('increment');
+
+        function decrementCounter() {
+            const currentCount = parseInt(counterDisplay.value);
+            if (!isNaN(currentCount)) {
+                const newCount = Math.max(0, currentCount - 1);
+                counterDisplay.value = newCount;
+            }
+        }
+
+        function incrementCounter() {
+            const currentCount = parseInt(counterDisplay.value);
+            if (!isNaN(currentCount)) {
+                counterDisplay.value = currentCount + 1;
+            }
+        }
+
+        function inputValidator() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        }
+
+
+        decrement.addEventListener('click', decrementCounter);
+        increment.addEventListener('click', incrementCounter);
+        counterDisplay.addEventListener('input', inputValidator);
+    </script>
+</body>
+
+</html>
